@@ -3,21 +3,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-  emailaddress: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   lastname: { type: String, required: true },
-  address: [
-    {
-      country: String,
-      city: String,
-      street: String,
-      streetNumber: Number,
-      appartmentNumber: { type: Number, unique: true },
-    },
-  ],
+  password: { type: String, required: true },
+  emailaddress: { type: String, required: true, unique: true },
+  address: {
+    country: { type: String, required: true },
+    city: { type: String, required: true },
+    postalcode: { type: Number, required: true },
+    street: { type: String, required: true },
+    streetNumber: { type: Number, required: true },
+    appartmentNumber: { type: String, required: false },
+  },
+
   phone: { type: Number, required: false },
-  boughtProducts: [{ type: Schema.Types.ObjectId, ref: "Product" }],
-  lastLoggedIn: { type: Date, required: true },
 });
 
 module.exports = mongoose.model("user", userSchema);
