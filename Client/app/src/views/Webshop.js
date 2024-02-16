@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { URL } from "../config";
-import AddToCartButton from "../components/Addtocart";
+import AddToCartButton from "../components/AddToCartButton";
 
 const Webshop = () => {
   const [products, setProducts] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cart, setCart] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,22 +21,15 @@ const Webshop = () => {
     fetchProducts();
   }, []);
 
-  // useEffect(() => {
-  //   const addProductsToCart = async () => {
-  //     try {
-  //       const response = await axios.post(`${URL}/product/addProduct`);
-  //       setCart(response.data.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   addProductsToCart()
-  // },[]);
-
-  const handleAddToCart = () => {
-    console.log("Product added to cart!");
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
   };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  console.log("cartitems", cartItems);
 
   const handleDotClick = (index) => {
     setActiveIndex(index);
@@ -46,7 +39,6 @@ const Webshop = () => {
     const intervalId = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % (products.length || 1));
     }, 3000); // Change slide duration as needed (in milliseconds)
-
     return () => clearInterval(intervalId);
   }, [products]);
 
@@ -69,7 +61,7 @@ const Webshop = () => {
                   <p>
                     {product.name} - €{product.price}
                   </p>
-                  <AddToCartButton onClick={() => handleAddToCart(product)} />
+                  <AddToCartButton product={product} addToCart={addToCart} />
                 </div>
               </li>
             ))
