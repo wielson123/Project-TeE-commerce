@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+html {
+  font-size: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  height: 9vh;
+  background-color: rgb(66, 247, 168);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rightnav {
+  margin-right: 2rem;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.rightnav > a {
+  padding: 10px;
+}
+
+.company {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 3em;
+}
+
+.stupidNavLink {
+  text-decoration: none;
+  color: black;
+}
+
+.hamburger {
+  position: relative;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.hamburger-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.hamburger:hover .hamburger-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  animation: popup 0.5s ease-in-out both;
+  background-color: blanchedalmond;
+  width: 200px;
+  height: 40vh;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.hamburger-content a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hamburger span {
+  transition: transform 0.5s;
+  -webkit-transition: -webkit-transform 0.5s;
+  display: block;
+  transform: rotate(90deg);
+}
+
+.hamburger p {
+  width: 100px;
+  background-color: black;
+  border-bottom: 1px solid white;
+  color: wheat;
+}
+
+/* Homepage */
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* webshop */
+
+/* Products grid styles */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Automatically adjust columns */
+  grid-gap: 20px; /* Adjust the gap between products */
+  padding: 10px;
+  overflow-y: auto; /* Allow vertical scrolling */
+  width: 70%;
+}
+
+.products {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-gap: 20px; /* Adjust the gap between products */
+}
+
+.product {
+  box-sizing: border-box;
+}
+
+.productImage {
+  width: 100%;
+  height: auto;
+}
+
+.productDescription {
+  text-align: center;
+}
+/* CSS for sticky container */
+.sticky-container {
+  position: fixed;
+  top: 15vh;
+  right: 5px;
+  width: 25%;
+  margin-right: 20px;
+}
+
+/* CSS for sticky div inside sticky container */
+.sticky-div {
+  position: sticky;
+  top: 20px; /* Adjust as needed */
+  z-index: 100;
+}
+
+/* Other styles for sticky image and dots container */
+.sticky-image {
+  display: block;
+  width: 100%;
+  max-width: 500px; /* Adjust image width as needed */
+  height: 60vh;
+  margin-bottom: 10px;
+}
+
+.dots-container {
+  text-align: center;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+/* Team and Mission:  */
+
+.TeamMission {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.TeamMission h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.TeamMission .Mission {
+  color: rgb(66, 247, 168); /* You can change this to your desired color */
+}
+
+.TeamMission p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
 }

@@ -4,6 +4,10 @@ const app = require("express")();
 require("dotenv").config();
 const port = process.env.PORT || 5050;
 
+//CORS
+const cors = require("cors");
+app.use(cors());
+
 // Connecting to DB
 const mongoose = require("mongoose");
 
@@ -57,5 +61,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", require("./Routes/Users"));
 app.use("/product", require("./Routes/Product"));
+
+//images
+
+const path = require("path");
+app.use("/assets", express.static(path.join(__dirname, "images")));
 
 app.listen(port, () => console.log(`server listening on ${port}`));

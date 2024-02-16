@@ -1,57 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { URL } from "../config";
+import HomeButton from "./HomeButton";
 
 const Navbar = ({ isLoggedIn }) => {
+  console.log("URL:", URL);
   return (
     <div className="navbar">
-      <NavLink
-        to={"/"}
-        style={({ isActive }) =>
-          isActive ? linkStyles.activeLink : linkStyles.defaultLink
-        }
-      >
-        Home
-      </NavLink>
+      <div className="hamburger">
+        <span>|||</span>
+        <div className="hamburger-content">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/TeamMission">Team & Mission</NavLink>
+          <NavLink to="/Webshop">Shop</NavLink>
+          <NavLink to="/News"> News </NavLink>
+        </div>
+      </div>
+      <div>
+        <HomeButton />
+      </div>
 
-      {isLoggedIn === false && (
-        <>
-          <NavLink
-            to="/register"
-            style={({ isActive }) =>
-              isActive ? linkStyles.activeLink : linkStyles.defaultLink
-            }
-          >
-            Register
-          </NavLink>
-          <NavLink
-            to="/login"
-            style={({ isActive }) =>
-              isActive ? linkStyles.activeLink : linkStyles.defaultLink
-            }
-          >
-            Login
-          </NavLink>
-        </>
-      )}
-
-      <NavLink
-        to="/secret-page"
-        style={({ isActive }) =>
-          isActive ? linkStyles.activeLink : linkStyles.defaultLink
-        }
-      >
-        Secret
-      </NavLink>
+      <div className="rightnav">
+        <NavLink to="/register">Register</NavLink>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/CartPage">
+          <img src={`${URL}/assets/Carticon2.png`} alt="carticon" />
+        </NavLink>
+      </div>
     </div>
   );
 };
 
-const linkStyles = {
-  activeLink: {
-    color: "gray",
-  },
-  defaultLink: {
-    textDecoration: "none",
-    color: "white",
-  },
-};
+export default Navbar;

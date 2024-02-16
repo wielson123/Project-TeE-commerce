@@ -2,7 +2,7 @@ const { trusted } = require("mongoose");
 const Product = require("../Schemas/Product");
 
 const addProduct = async (req, res) => {
-  const { name, price, version } = req.body;
+  const { name, price, version, image } = req.body;
   try {
     const foundProduct = await Product.findOne({ name });
     if (foundProduct) {
@@ -15,6 +15,7 @@ const addProduct = async (req, res) => {
         name,
         price,
         version,
+        image,
       });
     }
     res.send({
@@ -29,6 +30,22 @@ const addProduct = async (req, res) => {
     });
   }
 };
+
+// display products
+
+const productDisplay = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.send({
+      ok: true,
+      data: products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//deleteProducs
 
 const deleteProduct = async (req, res) => {
   const { name } = req.body;
@@ -53,6 +70,8 @@ const deleteProduct = async (req, res) => {
     });
   }
 };
+
+// deleteCart
 
 const deleteCart = async (req, res) => {
   const {} = req.body;
@@ -81,4 +100,5 @@ module.exports = {
   addProduct,
   deleteProduct,
   deleteCart,
+  productDisplay,
 };

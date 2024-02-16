@@ -3,17 +3,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  lastname: { type: String, required: true },
+  firstname: { type: String },
+  lastname: { type: String },
   password: { type: String, required: true },
   emailaddress: { type: String, required: true, unique: true },
   address: {
-    country: { type: String, required: true },
-    city: { type: String, required: true },
-    postalcode: { type: Number, required: true },
-    street: { type: String, required: true },
-    streetNumber: { type: Number, required: true },
-    appartmentNumber: { type: String, required: false },
+    country: { type: String },
+    city: { type: String },
+    postalcode: { type: Number },
+    street: { type: String },
+    streetNumber: { type: Number },
+    appartmentNumber: { type: String },
   },
 
   phone: { type: Number, required: false },

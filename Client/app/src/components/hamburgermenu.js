@@ -1,22 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function hamburgerMenu() {
+function HamburgerMenu() {
   return (
     <ul className="hamb">
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/TeamMission">Team & Mission</Link>
+        <NavLink to="/TeamMission">Team & Mission</NavLink>
       </li>
       <li>
-        <Link to="Webshop">Shop</Link>
+        <NavLink to="/Webshop">Shop</NavLink>
       </li>
       <li>
-        <Link to="News"> News</Link>
+        <NavLink to="/News"> News</NavLink>
       </li>
     </ul>
   );
 }
-export default hamburgerMenu;
+export default HamburgerMenu;
