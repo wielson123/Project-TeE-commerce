@@ -21,12 +21,14 @@ const Webshop = () => {
     fetchProducts();
   }, []);
 
-  const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
+  // const addToCart = (product) => {
+  // const addToCart = (product) => {
+
+  //   setCartItems([...cartItems, {...product,quantity:1}]);
+  // };
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    localStorage.setItem("cart", JSON.stringify(cartItems)); //remember to clear localstorage when products are bought or cart is cleared
   }, [cartItems]);
 
   console.log("cartitems", cartItems);
