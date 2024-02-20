@@ -1,37 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { URL } from "../config";
-import AddToCartButton from "../components/AddToCartButton";
 
-const Webshop = () => {
-  const [products, setProducts] = useState(null);
+const Webshop = ({ products, addToCart }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${URL}/product/productDisplay`);
-        setProducts(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  // const addToCart = (product) => {
-  // const addToCart = (product) => {
-
-  //   setCartItems([...cartItems, {...product,quantity:1}]);
-  // };
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems)); //remember to clear localstorage when products are bought or cart is cleared
-  }, [cartItems]);
-
-  console.log("cartitems", cartItems);
 
   const handleDotClick = (index) => {
     setActiveIndex(index);
@@ -39,8 +10,9 @@ const Webshop = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % (products.length || 1));
+      setActiveIndex((prevIndex) => (prevIndex + 1) % (products?.length || 1));
     }, 3000); // Change slide duration as needed (in milliseconds)
+
     return () => clearInterval(intervalId);
   }, [products]);
 
@@ -48,10 +20,10 @@ const Webshop = () => {
     <div className="container">
       <div className="products-container">
         <ul className="products">
-          {products ? (
+          {products && products.length > 0 ? (
             products.map((product, index) => (
               <li
-                key={product._id}
+                key={product.id}
                 className={index === activeIndex ? "active" : "hidden"}
               >
                 <img
@@ -60,22 +32,23 @@ const Webshop = () => {
                   alt={product.name}
                 />
                 <div className="productDescription">
-                  <p>
-                    {product.name} - €{product.price}
-                  </p>
-                  <AddToCartButton product={product} addToCart={addToCart} />
+                  <h3>{product.name}</h3>
+                  <p>Price: ${product.price}</p>
+                  <button onClick={() => addToCart(product)}>
+                    Add to Cart
+                  </button>
                 </div>
               </li>
             ))
           ) : (
-            <h2>loading</h2>
+            <h2>No products available</h2>
           )}
         </ul>
       </div>
 
       <div className="sticky-container">
         <div className="sticky-div">
-          {products && (
+          {products && products.length > 0 && (
             <img
               src={`${URL}${products[activeIndex].image}`}
               alt={`Sticky Image ${activeIndex + 1}`}
@@ -84,7 +57,7 @@ const Webshop = () => {
           )}
           <div className="dots-container">
             {products &&
-              products.map((_, index) => (
+              products.map((product, index) => (
                 <span
                   key={index}
                   className={`dot ${index === activeIndex ? "active" : ""}`}

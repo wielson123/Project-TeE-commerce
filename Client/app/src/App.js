@@ -19,11 +19,18 @@ import Login from "./views/Login.js";
 import Register from "./views/Register.js";
 import SecretPage from "./views/SecretPage.js";
 import CartPage from "./views/CartPage.js";
+import cancel from "./views/cancel.js";
+import succes from "./views/succes.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
+
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  // login, logout, register as a user
 
   useEffect(() => {
     const verify_token = async () => {
@@ -60,13 +67,69 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  // fetch data about the products
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${URL}/product/productDisplay`);
+        setProducts(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const addToCart = (product) => {
+    const existingProductIndex = cart.findIndex(
+      (item) => item.name === product.name
+    );
+
+    if (existingProductIndex !== -1) {
+      setCart((prevCart) => {
+        const updatedCart = [...prevCart];
+        updatedCart[existingProductIndex] = {
+          ...updatedCart[existingProductIndex],
+          quantity: updatedCart[existingProductIndex].quantity + 1,
+        };
+        return updatedCart;
+      });
+    } else {
+      setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeItem(productId);
+    } else {
+      const updatedCart = cart.map((item) =>
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      );
+      setCart(updatedCart);
+    }
+  };
+
+  const removeItem = (productId) => {
+    const updatedCart = cart.filter((item) => item.id !== productId);
+    setCart(updatedCart);
+  };
+
+  const emptyCart = () => {
+    setCart([]);
+  };
+
   return (
     <Router>
       <Navbar isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/TeamMission" element={<TeamMission />} />
-        <Route path="/Webshop" element={<Webshop />} />
+        <Route
+          path="/Webshop"
+          element={<Webshop products={products} addToCart={addToCart} />}
+        />
         <Route path="/News" element={<News />} />
         <Route
           path="/login"
@@ -92,7 +155,17 @@ function App() {
             )
           }
         />
-        <Route path="/CartPage" element={<CartPage />} />
+        <Route
+          path="/CartPage"
+          element={
+            <CartPage
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+              emptyCart={emptyCart}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
