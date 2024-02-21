@@ -2,7 +2,7 @@ const { trusted } = require("mongoose");
 const Product = require("../Schemas/Product");
 
 const addProduct = async (req, res) => {
-  const { name, price, version, image } = req.body;
+  const { name, price, version, image, description } = req.body;
   try {
     const foundProduct = await Product.findOne({ name });
     if (foundProduct) {
@@ -16,6 +16,7 @@ const addProduct = async (req, res) => {
         price,
         version,
         image,
+        description,
       });
     }
     res.send({

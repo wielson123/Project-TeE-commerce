@@ -15,16 +15,24 @@ html {
   display: flex;
   justify-content: space-around;
   padding: 10px;
+  text-decoration: none;
 }
 
 .rightnav > a {
+  display: flex;
+  align-items: center;
   padding: 10px;
+  text-decoration: none;
 }
 
 .company {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-size: 3em;
+  display: flex;
+  display: inline-block;
+  text-align: center;
+  margin-left: 60%;
 }
 
 .stupidNavLink {
@@ -78,9 +86,45 @@ html {
 
 /* Homepage */
 .homepage {
+  height: 91vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url(../../../Server/images/mountains.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  background-color: #ded1d1;
+}
+
+.homepage-title {
+  font-size: 3rem;
+  color: rgb(1, 1, 1);
+  margin-bottom: 20px;
+}
+
+.homepage-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.homepage-footer {
+  margin-bottom: 15vh;
+}
+
+.discover-button {
+  width: 500px;
+  height: 50px;
+  background-color: aquamarine;
+  border: solid 1px black;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  border-radius: 50%;
 }
 
 /* webshop */
@@ -134,7 +178,7 @@ html {
 }
 
 /* Other styles for sticky image and dots container */
-.sticky-image {
+.stickyIm {
   display: block;
   width: 100%;
   max-width: 500px; /* Adjust image width as needed */
@@ -187,7 +231,145 @@ html {
 
 /* cart */
 
+.Cart {
+  margin: left 20px;
+}
+
 .CartImage {
-  width: 20%;
+  width: 15%;
   height: auto;
+}
+
+.CartInfo {
+  text-align: center;
+}
+
+.CartOversight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Buttons {
+  display: flex;
+  align-items: center;
+}
+
+.Buttons button {
+  height: 3vh;
+  margin: 5px;
+}
+
+.Buttons:last-child {
+  margin-right: 100px;
+}
+
+/* register page */
+
+.form_container {
+  text-align: center;
+  margin-top: 40vh;
+}
+
+.checkout_container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.button {
+  color: white;
+  background-color: #919799;
+  font-weight: 700;
+  font-size: 1em;
+  letter-spacing: 0.2em;
+  padding: 1em;
+}
+
+.total {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.header {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.products_list {
+  width: 100%;
+  margin: 1em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.product_container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.image_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text_container {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  max-height: 5vh;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.message_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message_box {
+  width: 30%;
+  height: 25%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+  border-radius: 0.4em;
+}
+
+.message_box_left {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message_box_right {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }

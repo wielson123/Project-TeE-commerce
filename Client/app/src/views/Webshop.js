@@ -51,7 +51,7 @@ const Webshop = ({ products, addToCart }) => {
           {products && products.length > 0 && (
             <img
               src={`${URL}${products[activeIndex].image}`}
-              alt={`Sticky Image ${activeIndex + 1}`}
+              alt={`StickyIm ${activeIndex + 1}`}
               className="sticky-image active"
             />
           )}

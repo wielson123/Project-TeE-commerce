@@ -19,13 +19,14 @@ import Login from "./views/Login.js";
 import Register from "./views/Register.js";
 import SecretPage from "./views/SecretPage.js";
 import CartPage from "./views/CartPage.js";
-import cancel from "./views/cancel.js";
-import succes from "./views/succes.js";
+import Stripe from "./components/stripe";
+import PaymentSuccess from "./views/payment_success";
+import PaymentError from "./views/payment_error";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
+  const [token] = useState(JSON.parse(localStorage.getItem("token")));
 
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -105,14 +106,14 @@ function App() {
       removeItem(productId);
     } else {
       const updatedCart = cart.map((item) =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
+        item._id === productId ? { ...item, quantity: newQuantity } : item
       );
       setCart(updatedCart);
     }
   };
 
   const removeItem = (productId) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
+    const updatedCart = cart.filter((item) => item._id !== productId);
     setCart(updatedCart);
   };
 
@@ -155,10 +156,11 @@ function App() {
             )
           }
         />
+
         <Route
           path="/CartPage"
           element={
-            <CartPage
+            <Stripe
               cart={cart}
               updateQuantity={updateQuantity}
               removeItem={removeItem}
@@ -166,6 +168,8 @@ function App() {
             />
           }
         />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/error" element={<PaymentError />} />
       </Routes>
     </Router>
   );

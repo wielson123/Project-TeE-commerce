@@ -61,6 +61,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", require("./Routes/Users"));
 app.use("/product", require("./Routes/Product"));
+app.use("/payment", require("./Routes/payment.route.js"));
 
 //images
 

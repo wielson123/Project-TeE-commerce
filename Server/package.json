@@ -11,6 +11,8 @@
   "dependencies": {
     "@adminjs/express": "^5.0.1",
     "@adminjs/mongoose": "^3.0.1",
+    "@stripe/react-stripe-js": "^2.5.0",
+    "@stripe/stripe-js": "^3.0.4",
     "adminjs": "^6.6.5",
     "argon2": "^0.31.2",
     "cors": "^2.8.5",
@@ -20,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
     "nodemon": "^3.0.3",
+    "stripe": "^14.17.0",
     "validator": "^13.11.0"
   }
 }
