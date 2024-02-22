@@ -18,10 +18,10 @@ import News from "./views/News";
 import Login from "./views/Login.js";
 import Register from "./views/Register.js";
 import SecretPage from "./views/SecretPage.js";
-import CartPage from "./views/CartPage.js";
 import Stripe from "./components/stripe";
 import PaymentSuccess from "./views/payment_success";
 import PaymentError from "./views/payment_error";
+import Contact from "./views/Contact.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -168,6 +168,7 @@ function App() {
             />
           }
         />
+        <Route path="/Contact" element={<Contact />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
       </Routes>

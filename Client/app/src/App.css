@@ -129,7 +129,9 @@ html {
 
 /* webshop */
 
-/* Products grid styles */
+.container {
+  background-color: rgb(223, 213, 200);
+}
 .products-container {
   display: grid;
   grid-template-columns: repeat(
@@ -156,6 +158,7 @@ html {
 .productImage {
   width: 100%;
   height: auto;
+  border: 2px solid black;
 }
 
 .productDescription {
@@ -164,26 +167,25 @@ html {
 /* CSS for sticky container */
 .sticky-container {
   position: fixed;
-  top: 15vh;
+  top: 12vh;
   right: 5px;
   width: 25%;
   margin-right: 20px;
 }
 
-/* CSS for sticky div inside sticky container */
 .sticky-div {
   position: sticky;
   top: 20px; /* Adjust as needed */
   z-index: 100;
 }
 
-/* Other styles for sticky image and dots container */
-.stickyIm {
+.sticky-image {
   display: block;
   width: 100%;
   max-width: 500px; /* Adjust image width as needed */
   height: 60vh;
   margin-bottom: 10px;
+  border: 2px solid black;
 }
 
 .dots-container {
@@ -233,6 +235,7 @@ html {
 
 .Cart {
   margin: left 20px;
+  background-color: bisque;
 }
 
 .CartImage {

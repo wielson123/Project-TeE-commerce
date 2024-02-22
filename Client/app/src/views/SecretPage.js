@@ -1,20 +1,78 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../config";
+import axios from "axios";
+import { useState } from "react";
 
 const SecretPage = (props) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const [form, setValues] = useState({
+    emailaddress: "",
+    emailaddress2: "",
+  });
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setValues({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      debugger;
+      const response = await axios.post(`${URL}/users/deleteUser`, {
+        emailaddress: form.emailaddress,
+        emailaddress2: form.emailaddress,
+      });
+      setMessage(response.data.data);
+
+      console.log(response);
+      console.log(response.data.data);
+      if (
+        response.data.ok &&
+        message !==
+          `User with emailaddress ${form.emailaddress} successfully deleted.`
+      ) {
+        props.logout();
+        navigate("/");
+        alert("We're sorry you are leaving :(");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="secret_page">
-      <h1>This is the secret page for {props.user.emailaddress}</h1>
+      <h1>This is the secret page for {props.user.email}</h1>
       <h2>You can access here only after verify the token</h2>
-      <button
-        onClick={() => {
-          props.logout();
-          navigate("/");
-        }}
+
+      <form
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        className="form_container"
       >
-        logout
-      </button>
+        <label>Enter emailaddress</label>
+        <input name="emailaddress" />
+
+        <label>Confirm emailaddress</label>
+        <input name="emailaddress2" /*required*/ />
+
+        <button>Delete account</button>
+
+        <div className="message"></div>
+      </form>
+      <div>
+        <button
+          onClick={() => {
+            props.logout();
+            navigate("/");
+          }}
+        >
+          logout
+        </button>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,20 @@ const port = process.env.PORT || 5050;
 const cors = require("cors");
 app.use(cors());
 
+//or enable it only for the specific url
+app.options("/sendEmail", cors());
+
+// allowing requests from the front-end to our server with api calls
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  next();
+});
+
 // Connecting to DB
 const mongoose = require("mongoose");
 
@@ -62,7 +76,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/users", require("./Routes/Users"));
 app.use("/product", require("./Routes/Product"));
 app.use("/payment", require("./Routes/payment.route.js"));
-
+app.use("/emails", require("./Routes/email.route.js"));
+// app.use("/admin", require("/Routes/admin"));
 //images
 
 const path = require("path");

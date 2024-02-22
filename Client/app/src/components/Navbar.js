@@ -14,6 +14,7 @@ const Navbar = ({ isLoggedIn, totalCartQuantity }) => {
           <NavLink to="/TeamMission">Team & Mission</NavLink>
           <NavLink to="/Webshop">Shop</NavLink>
           <NavLink to="/News"> News </NavLink>
+          <NavLink to="/Contact"> Contact us </NavLink>
         </div>
       </div>
       <div>
@@ -21,8 +22,13 @@ const Navbar = ({ isLoggedIn, totalCartQuantity }) => {
       </div>
 
       <div className="rightnav">
-        <NavLink to="/register">Register</NavLink>
-        <NavLink to="/login">Login</NavLink>
+        {isLoggedIn === false && (
+          <>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/login">Login</NavLink>
+          </>
+        )}
+        <NavLink to="/secret-page">My dashboard</NavLink>
         <NavLink to="/CartPage">
           <img src={`${URL}/assets/Carticon2.png`} alt="carticon" />
           {totalCartQuantity > 0 && <span>{totalCartQuantity}</span>}

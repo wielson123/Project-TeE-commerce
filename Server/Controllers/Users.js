@@ -21,8 +21,6 @@ const register = async (req, res) => {
   const salt = "321dsa";
   const { emailaddress, password } = req.body;
   if (!emailaddress || !password) {
-    debugger;
-
     return res.json({ ok: false, message: "All fields required" });
   }
 

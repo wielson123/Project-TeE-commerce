@@ -33,6 +33,7 @@ const Webshop = ({ products, addToCart }) => {
                 />
                 <div className="productDescription">
                   <h3>{product.name}</h3>
+                  <p>{product.description}</p>
                   <p>Price: ${product.price}</p>
                   <button onClick={() => addToCart(product)}>
                     Add to Cart

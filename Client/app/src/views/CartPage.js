@@ -80,6 +80,7 @@ const Cart = ({ cart, updateQuantity, removeItem, emptyCart }) => {
               <div className="CartInfo">
                 <h3>{item.name}</h3>
                 <p>Price: ${item.price}</p>
+                <p>{item.description}</p>
               </div>
               <div className="Buttons">
                 <button
