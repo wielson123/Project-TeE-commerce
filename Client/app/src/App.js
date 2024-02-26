@@ -22,12 +22,19 @@ import Stripe from "./components/stripe";
 import PaymentSuccess from "./views/payment_success";
 import PaymentError from "./views/payment_error";
 import Contact from "./views/Contact.js";
+import AdmDash from "./views/Admin_dashboard.js";
+import Faqs from "./views/Faqs";
+import Returns from "./views/Return";
+import Shipping from "./views/Shipping";
+import Care from "./views/Care";
+import SizeGuide from "./views/SizeGuide";
+import Footer from "./components/Footer.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
+  const [adminStatus, setAdminStatus] = useState(null);
   const [token] = useState(JSON.parse(localStorage.getItem("token")));
-
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -51,11 +58,13 @@ function App() {
   }, [token]);
 
   const login = (token) => {
+    debugger;
     let decodedToken = jose.decodeJwt(token);
     console.log(decodedToken);
     // composing a user object based on what data we included in our token (login controller - jwt.sign() first argument)
     let user = {
       email: decodedToken.userEmail,
+      admin: decodedToken.admin,
     };
     localStorage.setItem("token", JSON.stringify(token));
     setIsLoggedIn(true);
@@ -102,6 +111,7 @@ function App() {
   };
 
   const updateQuantity = (productId, newQuantity) => {
+    debugger;
     if (newQuantity <= 0) {
       removeItem(productId);
     } else {
@@ -142,6 +152,9 @@ function App() {
             )
           }
         />
+        {isLoggedIn && adminStatus ? (
+          <Route path="/admin" element={<AdmDash logout={logout} />} />
+        ) : null}
         <Route
           path="/register"
           element={isLoggedIn ? <Navigate to="/secret-page" /> : <Register />}
@@ -151,12 +164,13 @@ function App() {
           element={
             !isLoggedIn ? (
               <Navigate to="/" />
+            ) : user.admin ? (
+              <AdmDash logout={logout} />
             ) : (
               <SecretPage logout={logout} user={user} />
             )
           }
         />
-
         <Route
           path="/CartPage"
           element={
@@ -171,7 +185,13 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
+        <Route path="/faq's" element={<Faqs />} />
+        <Route path="/returns" element={<Returns />} />
+        <Route path="/shipping" element={<Shipping />} />
+        <Route path="/care" element={<Care />} />
+        <Route path="/sizeguide" element={<SizeGuide />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -20,7 +20,6 @@ export default function Contact() {
     };
     // sending request to the server
     try {
-      debugger;
       const res = await axios.post(
         "http://localhost:5010/emails/send_email",
         data

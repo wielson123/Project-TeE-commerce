@@ -3,7 +3,6 @@ import React from "react";
 const TeamMission = () => {
   return (
     <div className="TeamMission">
-      <h1>Team</h1>
       <h1 className="Mission"> Mission</h1>
       <p>
         "Our mission at BS is to empower individuals to express their unique

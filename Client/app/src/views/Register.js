@@ -37,22 +37,25 @@ const Register = (props) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-      className="form_container"
-    >
-      <label>Email</label>
-      <input name="emailaddress" />
+    <div>
+      <h2>Register to enjoy exclusive discounts!</h2>
+      <form
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        className="form_container"
+      >
+        <label>Email</label>
+        <input name="emailaddress" />
 
-      <label>Password</label>
-      <input name="password" /*required*/ />
+        <label>Password</label>
+        <input name="password" /*required*/ />
 
-      <button>register</button>
-      <div className="message">
-        <h4>{message}</h4>
-      </div>
-    </form>
+        <button>register</button>
+        <div className="message">
+          <h4>{message}</h4>
+        </div>
+      </form>
+    </div>
   );
 };
 

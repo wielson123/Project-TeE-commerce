@@ -16,13 +16,6 @@ const Cart = ({ cart, updateQuantity, removeItem, emptyCart }) => {
 
   const navigate = useNavigate();
   const stripe = useStripe();
-
-  // const calculate_total = () => {
-  //   let total = 0;
-  //   products.forEach((ele) => (total += ele.quantity * ele.price));
-  //   return total;
-  // };
-
   // 1. When we click PAY button this function triggers first
   const createCheckoutSession = async () => {
     try {
@@ -100,16 +93,18 @@ const Cart = ({ cart, updateQuantity, removeItem, emptyCart }) => {
               </div>
             </div>
           ))}
-          <h1>Products in cart: {totalQuantity}</h1>
+          <h1 className="inCart">Products in cart: {totalQuantity}</h1>
           <p>Total: ${totalPrice.toFixed(2)}</p>
           <button onClick={() => emptyCart()}>Empty Cart</button>
-          <button className="button" onClick={() => createCheckoutSession()}>
-            Pay now
-          </button>
+          <div className="pay-now-container">
+            <button className="button" onClick={() => createCheckoutSession()}>
+              Pay now
+            </button>
+          </div>
         </div>
       )}
 
-      <div>
+      <div className="continueshopping">
         <ContinueShopping />
       </div>
     </div>
@@ -117,23 +112,3 @@ const Cart = ({ cart, updateQuantity, removeItem, emptyCart }) => {
 };
 
 export default Cart;
-
-// return (
-// <div className="checkout_container">
-//   <div className="header">Checkout - Check products before pay</div>
-//   <div className="products_list">
-//     {products.map((item, idx) => {
-//       return <Product key={idx} {...item} />;
-//     })}
-//   </div>
-//       <div className="footer">
-//         <div className="total">Total : {calculate_total()} €</div>
-//         <button className="button" onClick={() => createCheckoutSession()}>
-//           PAY
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Checkout;

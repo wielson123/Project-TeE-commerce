@@ -27,8 +27,6 @@ const SecretPage = (props) => {
       });
       setMessage(response.data.data);
 
-      console.log(response);
-      console.log(response.data.data);
       if (
         response.data.ok &&
         message !==
@@ -45,8 +43,17 @@ const SecretPage = (props) => {
 
   return (
     <div className="secret_page">
-      <h1>This is the secret page for {props.user.email}</h1>
-      <h2>You can access here only after verify the token</h2>
+      <h1>Welcome to your dashboard {props.user.emailaddress}</h1>
+      <h2>
+        Here you can see your profile information and your shipping address
+      </h2>
+      <p>name: {props.user.firstname}</p>
+      <p>email: {props.user.email}</p>
+      <p>addres: {props.user.name}</p>
+      <p>street: {props.user.email}</p>
+      <p>number: {props.user.name}</p>
+      <p>postal code: {props.user.email}</p>
+      <p>phone number:{props.user.email} </p>
 
       <form
         onSubmit={handleSubmit}

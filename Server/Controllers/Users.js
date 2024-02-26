@@ -20,6 +20,7 @@ const register = async (req, res) => {
   // this salt can be truly random with one of available npm packages
   const salt = "321dsa";
   const { emailaddress, password } = req.body;
+
   if (!emailaddress || !password) {
     return res.json({ ok: false, message: "All fields required" });
   }
@@ -46,6 +47,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { emailaddress, password } = req.body;
+
   if (!emailaddress || !password) {
     return res.json({ ok: false, message: "All fields are required" });
   }
@@ -53,19 +55,58 @@ const login = async (req, res) => {
     return res.json({ ok: false, message: "Invalid email provided" });
   }
   try {
-    const user = await User.findOne({ emailaddress });
-    if (!user) return res.json({ ok: false, message: "Invalid user provided" });
-    const match = await argon2.verify(user.password, password);
-    if (match) {
-      // once user is verified and confirmed we send back the token to keep in localStorage in the client and in this token we can add some data -- payload -- to retrieve from the token in the client and see, for example, which user is logged in exactly. The payload would be the first argument in .sign() method. In the following example we are sending an object with key userEmail and the value of email coming from the "user" found in line 47
-      const token = jwt.sign({ userEmail: user.emailaddress }, jwt_secret, {
-        expiresIn: "1",
-      }); //{expiresIn:'365d'}
-      // after we send the payload to the client you can see how to get it in the client's Login component inside handleSubmit function
-      res.json({ ok: true, message: "welcome back", token, user });
-    } else return res.json({ ok: false, message: "Invalid data provided" });
+    if (
+      emailaddress === process.env.ADMIN &&
+      password === process.env.ADMINPASSWORD
+    ) {
+      const token = jwt.sign(
+        { userEmail: process.env.ADMIN, admin: true },
+        jwt_secret,
+        {
+          expiresIn: "1h",
+        }
+      ); //{expiresIn:'365d'}
+
+      res.json({
+        ok: true,
+        message: "logged in as administrator",
+        token,
+        admin: true,
+      });
+    } else {
+      const user = await User.findOne({ emailaddress });
+      if (!user)
+        return res.json({ ok: false, message: "Invalid user provided" });
+      const match = await argon2.verify(user.password, password);
+      if (match) {
+        // once user is verified and confirmed we send back the token to keep in localStorage in the client and in this token we can add some data -- payload -- to retrieve from the token in the client and see, for example, which user is logged in exactly. The payload would be the first argument in .sign() method. In the following example we are sending an object with key userEmail and the value of email coming from the "user" found in line 47
+        const token = jwt.sign({ userEmail: user.emailaddres }, jwt_secret, {
+          expiresIn: "1h",
+        }); //{expiresIn:'365d'}
+
+        // after we send the payload to the client you can see how to get it
+        res.json({ ok: true, message: "welcome back", token, user });
+      } else return res.json({ ok: false, message: "Invalid data provided" });
+    }
   } catch (error) {
     res.json({ ok: false, error });
+  }
+};
+
+// display one user
+
+// Controller function to get logged-in user's information
+const userDisplay = async (req, res) => {
+  try {
+    // Fetch user information based on the logged-in user's ID stored in the session or authentication token
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.send({ ok: true, message: "User not found" });
+    }
+    res.send(user); // Send the user's information as a JSON response
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 };
 
@@ -132,4 +173,5 @@ module.exports = {
   register,
   login,
   verify_token,
+  userDisplay,
 };

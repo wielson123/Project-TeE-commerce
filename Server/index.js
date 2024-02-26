@@ -40,32 +40,34 @@ async function connectingDB() {
 }
 connectingDB();
 
-// ADMINJS
+const NODE_ENV = process.env.NODE_ENV; // <-- check the environment
+if (NODE_ENV === "dev") {
+  // ADMINJS
 
-// first install adminjs and the dependencies
-// npm i adminjs @adminjs/express @adminjs/mongoose  tslib express-formidable express-session
+  // first install adminjs and the dependencies
+  // npm i adminjs @adminjs/express @adminjs/mongoose  tslib express-formidable express-session
 
-// require adminjs
-const AdminJS = require("adminjs");
-// require express plugin
-const AdminJSExpress = require("@adminjs/express");
-// require mongoose adapter
-AdminJS.registerAdapter(require("@adminjs/mongoose"));
-// Import all the project's models
-const Users = require("./Schemas/Users"); // replace this for your model
-const Product = require("./Schemas/Product"); // replace this for your model
-// set up options -- models to use and a route to open dashboard
-const adminOptions = {
-  resources: [Product, Users], // Put own schemas here
-  rootPath: "/admin",
-};
-// initialize adminjs
-const admin = new AdminJS(adminOptions);
-// build admin route
-const router = AdminJSExpress.buildRouter(admin);
-app.use(admin.options.rootPath, router);
-// end ADMINJS
-
+  // require adminjs
+  const AdminJS = require("adminjs");
+  // require express plugin
+  const AdminJSExpress = require("@adminjs/express");
+  // require mongoose adapter
+  AdminJS.registerAdapter(require("@adminjs/mongoose"));
+  // Import all the project's models
+  const Users = require("./Schemas/Users"); // replace this for your model
+  const Product = require("./Schemas/Product"); // replace this for your model
+  // set up options -- models to use and a route to open dashboard
+  const adminOptions = {
+    resources: [Product, Users], // Put own schemas here
+    rootPath: "/admin",
+  };
+  // initialize adminjs
+  const admin = new AdminJS(adminOptions);
+  // build admin route
+  const router = AdminJSExpress.buildRouter(admin);
+  app.use(admin.options.rootPath, router);
+  // end ADMINJS
+}
 //accept certain POST body types
 
 app.use(express.json());
@@ -77,10 +79,15 @@ app.use("/users", require("./Routes/Users"));
 app.use("/product", require("./Routes/Product"));
 app.use("/payment", require("./Routes/payment.route.js"));
 app.use("/emails", require("./Routes/email.route.js"));
-// app.use("/admin", require("/Routes/admin"));
-//images
 
 const path = require("path");
 app.use("/assets", express.static(path.join(__dirname, "images")));
+
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "../client/app/build")));
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/app/build", "index.html"));
+});
 
 app.listen(port, () => console.log(`server listening on ${port}`));

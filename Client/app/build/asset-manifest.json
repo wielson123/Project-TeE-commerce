@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f4bfd05a.css",
+    "main.js": "/static/js/main.25e3f2e5.js",
+    "static/js/592.918a8bb2.chunk.js": "/static/js/592.918a8bb2.chunk.js",
+    "static/media/mountains.jpg": "/static/media/mountains.a8ae2b0c9fed496188e6.jpg",
+    "index.html": "/index.html",
+    "main.f4bfd05a.css.map": "/static/css/main.f4bfd05a.css.map",
+    "main.25e3f2e5.js.map": "/static/js/main.25e3f2e5.js.map",
+    "592.918a8bb2.chunk.js.map": "/static/js/592.918a8bb2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4bfd05a.css",
+    "static/js/main.25e3f2e5.js"
+  ]
+}

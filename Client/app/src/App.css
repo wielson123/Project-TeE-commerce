@@ -2,20 +2,19 @@ html {
   font-size: 16px;
 }
 
+/* navbar */
+
 .navbar {
   height: 9vh;
   background-color: rgb(66, 247, 168);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .rightnav {
   margin-right: 2rem;
   display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  text-decoration: none;
 }
 
 .rightnav > a {
@@ -23,6 +22,8 @@ html {
   align-items: center;
   padding: 10px;
   text-decoration: none;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: black;
 }
 
 .company {
@@ -30,9 +31,8 @@ html {
     "Lucida Sans", Arial, sans-serif;
   font-size: 3em;
   display: flex;
-  display: inline-block;
   text-align: center;
-  margin-left: 60%;
+  color: rgb(0, 0, 0);
 }
 
 .stupidNavLink {
@@ -40,53 +40,138 @@ html {
   color: black;
 }
 
-.hamburger {
-  position: relative;
-  display: inline-block;
-  margin-left: 2rem;
+.navbar-container input[type="checkbox"],
+.navbar-container .hamburger-lines {
+  display: block;
 }
 
-.hamburger-content {
-  display: none;
+.navbar-container {
+  display: block;
+  height: 110px;
+}
+
+.navbar-container input[type="checkbox"] {
   position: absolute;
-  left: 0;
-  z-index: 1;
+  display: block;
+  height: 32px;
+  width: 70px;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  opacity: 0;
 }
 
-.hamburger:hover .hamburger-content {
+.navbar-container .hamburger-lines {
+  display: block;
+  height: 23px;
+  width: 35px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  animation: popup 0.5s ease-in-out both;
-  background-color: blanchedalmond;
-  width: 200px;
-  height: 40vh;
   justify-content: space-between;
 }
 
-.hamburger-content a {
-  padding: 10px;
-  text-decoration: none;
-  color: black;
-}
-
-.hamburger span {
-  transition: transform 0.5s;
-  -webkit-transition: -webkit-transform 0.5s;
+.navbar-container .hamburger-lines .line {
   display: block;
-  transform: rotate(90deg);
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: #000000;
 }
 
-.hamburger p {
-  width: 100px;
-  background-color: black;
-  border-bottom: 1px solid white;
-  color: wheat;
+.navbar-container .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.navbar-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-container .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.navbar .menu-items {
+  padding-top: 90px;
+  background: #c8bdb3;
+  height: 35vh;
+  width: 190px;
+  max-width: 500px;
+  transform: translate(-200%);
+  display: flex;
+  flex-direction: column;
+
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 5px 0px 10px 0px #aaa;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.navbar .menu-items li {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.navbar .menu-items li a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-container input[type="checkbox"]:checked ~ .menu-items {
+  transform: translateX(0);
+}
+
+.navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  transform: rotate(35deg);
+}
+
+.navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+
+.navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  transform: rotate(-35deg);
+}
+
+/* footer */
+
+.footer {
+  list-style-type: none;
+  background-color: rgb(232, 205, 172);
+  display: flex;
+
+  width: 100%;
+  position: fixed;
+  justify-content: space-evenly;
+  align-items: center;
+  left: 0;
+  z-index: 10;
+  height: 50px;
+  bottom: -55px;
+
+  transition-duration: 0.5s;
+}
+
+.footer:hover {
+  height: 100px;
+}
+.footer li a {
+  text-decoration: none;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: black;
 }
 
 /* Homepage */
 .homepage {
-  height: 91vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,24 +199,22 @@ html {
 }
 
 .homepage-footer {
-  margin-bottom: 15vh;
+  margin-bottom: 30vh;
 }
 
 .discover-button {
-  width: 500px;
-  height: 50px;
+  width: 600px;
+  height: 110px;
   background-color: aquamarine;
-  border: solid 1px black;
+  border: solid 3px black;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   border-radius: 50%;
+  font-size: 3rem;
 }
 
 /* webshop */
 
-.container {
-  background-color: rgb(223, 213, 200);
-}
 .products-container {
   display: grid;
   grid-template-columns: repeat(
@@ -337,12 +420,6 @@ html {
   max-height: 5vh;
 }
 
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
 .message_container {
   width: 100%;
   height: 100vh;
@@ -375,4 +452,192 @@ html {
   font-size: 1.3em;
   font-weight: 600;
   letter-spacing: 0.1em;
+}
+
+.cart {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.cart h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.CartOversight {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.CartImage {
+  width: 100px;
+  height: auto;
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.CartInfo {
+  flex-grow: 1;
+}
+
+.CartInfo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.Buttons {
+  display: flex;
+  align-items: center;
+}
+
+.Buttons button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #f8f5f5;
+  color: #020202;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Buttons button:hover {
+  background-color: #94cf9c;
+}
+
+.ProductsInfo {
+  margin-top: 2rem;
+}
+
+.ProductsInfo p {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.ProductsInfo h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.ProductsInfo button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ProductsInfo button:hover {
+  background-color: #218838;
+}
+
+.ContinueShopping a:hover {
+  color: #0056b3;
+}
+
+.pay-now-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pay-now-container button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pay-now-container button:hover {
+  background-color: #218838;
+}
+
+.subscribe-btn {
+  background-color: #a9b8c8;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.subscribe-btn:hover {
+  background-color: #28a745;
+}
+
+.subscribe {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* FAQs */
+.footertitle {
+  font-family: "intro";
+  font-weight: 900;
+  font-size: 30px;
+  text-align: center;
+  color: rgba(117, 87, 75, 1);
+  letter-spacing: 4px;
+  padding-bottom: 5px;
+}
+
+.footersections {
+  width: 40%;
+  display: block;
+  flex-direction: column;
+  margin: auto;
+}
+
+.footersections h2 {
+  display: block;
+  color: rgba(111, 111, 111, 1);
+  width: 100%;
+  font-weight: 900;
+  padding-right: 5px;
+  font-size: 22px;
+  font-family: "intro";
+  text-align: center;
+  padding-left: 5px;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.footersections section {
+  color: rgba(111, 111, 111, 1);
+  width: 100%;
+  height: auto;
+  font-weight: 400;
+  padding-right: 5px;
+  font-size: 14px;
+  font-family: "intro";
+  min-width: 200px;
+  text-align: left;
+  padding-left: 5px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  text-align: center;
+  display: block;
+}
+
+.contact-us {
+  margin-bottom: 100px;
 }

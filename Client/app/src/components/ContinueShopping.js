@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 const ContinueShopping = ({ onClick }) => {
   return (
     <Link to="/Webshop">
-      <button onClick={onClick}>Continue shopping</button>
+      <div className="pay-now-container">
+        <button className="button" onClick={onClick}>
+          Continue shopping
+        </button>
+      </div>
     </Link>
   );
 };
