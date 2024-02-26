@@ -27,7 +27,6 @@ import Faqs from "./views/Faqs";
 import Returns from "./views/Return";
 import Shipping from "./views/Shipping";
 import Care from "./views/Care";
-import SizeGuide from "./views/SizeGuide";
 import Footer from "./components/Footer.js";
 
 function App() {
@@ -189,7 +188,6 @@ function App() {
         <Route path="/returns" element={<Returns />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/care" element={<Care />} />
-        <Route path="/sizeguide" element={<SizeGuide />} />
       </Routes>
       <Footer />
     </Router>

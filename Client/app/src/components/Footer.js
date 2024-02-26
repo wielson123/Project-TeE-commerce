@@ -17,9 +17,6 @@ const Footer = () => {
         <li>
           <NavLink to="/care"> T-SHIRT CARE </NavLink>
         </li>
-        <li>
-          <NavLink to="/sizeguide"> SIZE GUIDE </NavLink>
-        </li>
       </ul>
     </div>
   );

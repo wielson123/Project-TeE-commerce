@@ -84,10 +84,10 @@ const path = require("path");
 app.use("/assets", express.static(path.join(__dirname, "images")));
 
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, "../client/app/build")));
+app.use(express.static(path.join(__dirname, "../Client/app/build")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../client/app/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../Client/app/build", "index.html"));
 });
 
 app.listen(port, () => console.log(`server listening on ${port}`));

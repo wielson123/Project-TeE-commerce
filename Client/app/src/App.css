@@ -149,20 +149,20 @@ html {
   display: flex;
 
   width: 100%;
-  position: fixed;
+  position: relative;
   justify-content: space-evenly;
   align-items: center;
   left: 0;
   z-index: 10;
-  height: 50px;
-  bottom: -55px;
+  height: 70px;
+  bottom: -20px;
 
   transition-duration: 0.5s;
 }
 
-.footer:hover {
+/* .footer:hover {
   height: 100px;
-}
+} */
 .footer li a {
   text-decoration: none;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
