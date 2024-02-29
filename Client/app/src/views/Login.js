@@ -29,8 +29,15 @@ const Login = (props) => {
       });
       setMessage(response.data.message);
       if (response.data.ok) {
+        // here after login was successful we extract the email passed from the server inside the token
+        let decodedToken = jose.decodeJwt(response.data.token);
+        // and now we now which user is logged in in the client so we can manipulate it as we want, like fetching data for it or we can pass the user role -- admin or not -- and act accordingly, etc...
+        console.log(
+          "Email extracted from the JWT token after login: ",
+          decodedToken.userEmail
+        );
         setTimeout(() => {
-          props.login(response.data.token);
+          props.login(response.data.token, response.data.admin);
           navigate("/secret-page");
         }, 2000);
       }
@@ -39,20 +46,44 @@ const Login = (props) => {
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-      className="form_container"
-    >
-      <label>Email</label>
-      <input name="emailaddress" />
-      <label>Password</label>
-      <input name="password" />
-      <button>login</button>
-      <div className="message">
-        <h4>{message}</h4>
+    <div>
+      <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
       </div>
-    </form>
+      <form
+        className="loginform"
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      >
+        <h3 className="logintitle">Login Here</h3>
+        <label className="loginlabel">Username</label>
+        <input
+          className="logininput"
+          type="text"
+          placeholder="Email or Phone"
+          id="username"
+        />
+
+        <label className="loginlabel">Password</label>
+        <input
+          className="logininput"
+          type="text"
+          placeholder="Password"
+          id="password"
+        />
+
+        <button className="loginbutton">Log In</button>
+        <div className="social">
+          <div className="go">
+            <i className="fab fa-google"></i> Google
+          </div>
+          <div className="fb">
+            <i className="fab fa-facebook"></i> Facebook
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
